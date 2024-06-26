@@ -1,0 +1,14 @@
+-- SKILL_CODE = 2진수로 표현했을 때, 1인 자리 수 들의 합
+-- PYTHON OR C# 스킬 가진 개발자 정보 (EX. PYTHON = 256, C# = 1024 (고정된 값이 아님))
+-- ID 오름차순
+
+-- 1. PYTHON, C#의 2진수 코드값 찾기
+-- 2. 1번에 대한 자릿수 1을 갖고있는 개발자를 찾기
+SELECT ID, EMAIL, FIRST_NAME, LAST_NAME
+FROM DEVELOPERS
+WHERE SKILL_CODE & (
+    SELECT SUM(CODE)
+    FROM SKILLCODES
+    WHERE NAME IN ('Python', 'C#')
+) != 0
+ORDER BY ID
