@@ -2,28 +2,33 @@
 # 첫 인덱스는 중복이 안되게 뽑아야함 -> set(sl 배열)
 # 다음부터는 입력받은 lis의 갯수에 맞게 뽑아야함..
 
-from collections import Counter
+# path -> [a,b] != [b,a]이다. 즉, 원소의 순서가 보장되어야함.
 
-def backtracking(path):
+import sys
+
+input = sys.stdin.readline
+
+def backtracking(idx, path):
+    global res
     if len(path) == m:
-        print(*path)
+        if path not in res:
+            res.append(path[:])
         return
 
     for i in range(n):
-        path.append(lis[i])
-        backtracking(path)
-        path.pop()
+        if i != idx:
+            path.append(lis[i])
+            backtracking(i, path)
+            path.pop()
 
 n, m = map(int, input().split(" "))
 lis = list(map(int, input().split(" ")))
 
-sl = list(set(lis))
-sl = sorted(sl)
-lis = sorted(lis)
+lis = sorted(lis)   # 1 7 9 9
+res = []
 
-dic = Counter(lis)
+for i in range(n):
+    backtracking(i, [lis[i]])
 
-print(dic)
-
-for i in range(len(sl)):
-    backtracking([sl[i]])
+for r in res:
+    print(*r)
