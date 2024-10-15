@@ -7,7 +7,8 @@ def backtracking(path, lis, visit):
         return
 
     for i in range(n):
-        # 같은 인덱스를 두 번 방문하지 않고, 이전 값과 중복되지 않도록 처리
+        # 같은 인덱스를 두
+        # 번 방문하지 않고, 이전 값과 중복되지 않도록 처리
         if not visit[i] and lis[i] != prev:
             prev = lis[i]          # 현재 값이 이전 값과 다르면 prev를 갱신
             visit[i] = 1           # 현재 인덱스를 방문했다고 표시
